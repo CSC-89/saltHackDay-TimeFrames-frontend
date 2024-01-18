@@ -27,7 +27,8 @@ const Home = () => {
   };
 
   const removeTaskfromList = () => {
-    deleteTask();
+    console.log("clicked")
+    // deleteTask();
   }
 
   useEffect(() => {
