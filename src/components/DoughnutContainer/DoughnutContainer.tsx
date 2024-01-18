@@ -60,7 +60,6 @@ const DoughnutContainer: FC<DoughtnutProps> = ({ tasks, freeTime }) => {
       {
         labels: taskGroupData.map((data) => data.type),
         data: taskGroupData.map((data) => data.percentage),
-        //backgroundColor: tasks.map((data) => data.typeColor),
         backgroundColor: taskGroupData.map((data) => data.taskColor),
         hoverOffset: 4,
       },
