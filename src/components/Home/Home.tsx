@@ -19,6 +19,7 @@ const Home = () => {
 
   const addTaskHandler = async (data: Task) => {
     const response = await addNewTask(data);
+    console.log(response);
     setTasks([...tasks, response])
   }
   
@@ -26,12 +27,14 @@ const Home = () => {
     setTasks(await readTasks());
   };
 
-  const removeTaskfromList = (id: number, dbId: number) => {
+  const removeTaskfromList = (id: number) => {
+    const toDelete = tasks.findIndex(t => t.id === id);
+    console.log(id);
     const newArr = [...tasks];
-    newArr.splice(id, 1);
+    newArr.splice(toDelete, 1);
 
     setTasks(newArr);
-    deleteTask(dbId);
+    deleteTask(id);
   }
 
   useEffect(() => {
