@@ -1,7 +1,8 @@
 type Task = {
     id?: number
     content: string,
-    completionTime: number
+    completionTime: number,
+    taskType: string
     typeColor: string,
     dayDataId: number,
   }

@@ -9,7 +9,7 @@ export const readTasks = async () => {
 
 export const addNewTask = async (data: any) => {
   const addedTask = await axios
-    .post(path, { content: data.content, typeColor: data.typeColor })
+    .post(path, { content: data.content, taskType: data.taskType ,typeColor: data.typeColor, taskId: data.taskId })
     .then((results) => results.data);
 
     return addedTask;

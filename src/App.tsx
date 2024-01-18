@@ -5,12 +5,14 @@ import Home from './components/Home/Home'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { UserContext } from './context/userContext';
+import { ThemeProvider } from '@material-tailwind/react';
 
 function App() {
 
   return (
     <>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <ThemeProvider>
     <UserContext.Provider value={{id: 1}}>
       <Router>
         <Routes>
@@ -19,6 +21,7 @@ function App() {
         </Routes>
       </Router>
     </UserContext.Provider>
+    </ThemeProvider>
     </LocalizationProvider>
     </>
   )
