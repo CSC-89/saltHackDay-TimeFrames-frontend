@@ -22,7 +22,7 @@ const TaskForm: FC<TaskFormProps> = ({addTask}) => {
 
   return (
     <section className="border shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2 my-3">
-      <form className="flex flex-col" onSubmit={handleSubmit(addTask)}>
+      <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
         <input placeholder="What needs doing?" {...register("content")} />
         <div>
           <label htmlFor="waking-hour">
