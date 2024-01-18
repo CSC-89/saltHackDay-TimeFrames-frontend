@@ -21,7 +21,6 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const submitHandler: SubmitHandler<FormValues> = (data: FormValues) => {
-    console.log(data);
     updateFreeTime({workTime: data.workTime, wakeTime: data.wakeTime, sleepTime: data.sleepTime});
     setSelected(true);
   };

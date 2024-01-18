@@ -44,7 +44,6 @@ const Home = () => {
     fetchTasks();
   }, []);
 
-  console.log(freeTime);
   return (
     <div className="flex flex-col items-center">
       <Navbar />
