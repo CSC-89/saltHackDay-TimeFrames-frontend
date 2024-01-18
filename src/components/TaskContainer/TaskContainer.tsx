@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import TaskItem from '../TaskItem/TaskItem'
-import { deleteTask } from '../api/TaskApi'
 
 type TaskContainerProps = {
-  deleteTask: () => void;
+  deleteTask: (id: number) => void;
   tasks: Task[]
 }
 
