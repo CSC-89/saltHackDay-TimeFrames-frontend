@@ -14,7 +14,7 @@ const TaskContainer: FC<TaskContainerProps> = ({tasks, deleteTask, freeTime}) =>
         {tasks.length ? tasks.map((elm, i) => {
           return <TaskItem key={i} taskInfo={elm} deleteTask={deleteTask} freeTime={freeTime} />
         }) : 
-        <h3>Add some tasks</h3>
+        <h3 className='w-full text-secondary text-center'>Add some tasks</h3>
         } 
         
     </div>

@@ -67,9 +67,9 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
             className="rounded-sm ml-1"
             {...register("typeInfo", { required: "This is required" })}
           >
-            <option value="Study-yellow">Study</option>
             <option value="Exercise-purple">Exercise</option>
             <option value="Cleaning-blue">Cleaning</option>
+            <option value="Study-yellow">Study</option>
             <option value="Other-teal">Other</option>
           </select>
         </div>

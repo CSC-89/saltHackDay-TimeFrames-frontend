@@ -79,7 +79,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
         </button>
       </form> : (
         <div className="flex flex-col justify-center h-28">
-        <h2 className="text-sm">You have <span>{freeTime}</span> hours of free time today!</h2>
+        <h2 className="text-md text-center">You have <span className="text-secondary">{freeTime} hours</span> of free time today!</h2>
         <button
           onClick={resetHoursHandler}
           className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
