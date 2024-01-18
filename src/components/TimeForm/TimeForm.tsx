@@ -44,6 +44,8 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
             id="work-input"
               className="w-12 rounded-sm ml-4 text-center"
               type="number"
+              min={0}
+              max={12}
               {...register("workTime", { required: "This is required" })}
             />
         </div>
@@ -53,6 +55,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
             <input
               className="w-12 rounded-sm ml-4 text-center"
               type="number"
+              min={0}
               {...register("wakeTime", { required: "This is required" })}
             />
           </label>
@@ -61,6 +64,8 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
             <input
               className="w-12 rounded-sm ml-4 text-center"
               type="number"
+              min={0}
+              max={23}
               {...register("sleepTime")}
             />
           </label>
