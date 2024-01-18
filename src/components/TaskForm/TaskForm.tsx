@@ -41,23 +41,23 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
     <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
       <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
         <input id="content-input"
-          className="my-2"
+          className="my-2 rounded-sm"
           placeholder="What needs doing?"
           {...register("content", { required: "This is required" })}
         />
-        <div className="flex justify-between my-2">
+        <div className="flex justify-left my-2">
           <label htmlFor="completionTime">
-            <h2 className="">Completion time</h2>
+            <h2 className="">Duration:</h2>
           </label>
           <input id="completion-input"
-            className="w-10 ml-20"
+            className="w-12 rounded-sm ml-4"
             type="number"
             {...register("completionTime", { required: "This is required" })}
           />
         </div>
         <div className="my-2">
           Type:
-          <select id="type-input" {...register("typeInfo", { required: "This is required" })}>
+          <select id="type-input" className="rounded-sm ml-1" {...register("typeInfo", { required: "This is required" })}>
             <option value="Study-yellow">Study</option>
             <option value="Exercise-purple">Exercise</option>
             <option value="Cleaning-blue">Cleaning</option>

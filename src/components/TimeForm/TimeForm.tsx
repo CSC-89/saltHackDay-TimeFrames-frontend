@@ -36,21 +36,22 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
     <section className="shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2">
       {!selected ? <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
         <input {...register("date", { required: "This is required" })} value={date} hidden/>
-        <div>
-          <label className="flex justify-between">
-            Working Hours
+        <div className="mb-2 flex justify-between">
+          <label htmlFor="workInput" className="flex justify-between">
+            Working Hours:
+          </label>
             <input
-              className="time-input"
+            id="work-input"
+              className="w-12 rounded-sm ml-4 text-center"
               type="number"
               {...register("workTime", { required: "This is required" })}
             />
-          </label>
         </div>
         <div>
           <label htmlFor="waking-hour">
             Wake Up
             <input
-              className="time-input"
+              className="w-12 rounded-sm ml-4 text-center"
               type="number"
               {...register("wakeTime", { required: "This is required" })}
             />
@@ -58,7 +59,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
           <label className="pl-6">
             Bed
             <input
-              className="time-input"
+              className="w-12 rounded-sm ml-4 text-center"
               type="number"
               {...register("sleepTime")}
             />
@@ -66,7 +67,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
         </div>
         <button
           type="submit"
-          className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
+          className="m-2 mt-4 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
         >
           Set Free Time
         </button>
