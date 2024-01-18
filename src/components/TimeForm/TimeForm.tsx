@@ -34,7 +34,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
     <section className="shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2">
       {!selected ? <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
         <input {...register("date", { required: "This is required" })} value={date} hidden/>
-        <div className="mb-2 flex justify-between">
+        <div className="my-2 flex justify-between">
           <label htmlFor="workInput" className="flex justify-between">
             Working Hours:
           </label>
