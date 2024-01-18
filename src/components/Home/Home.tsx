@@ -6,7 +6,7 @@ import Navbar from "../Navbar/Navbar";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { addNewTask, deleteTask, readTasks } from "../api/TaskApi";
+import { addNewTask, deleteTask, readTasks } from "../../api/TaskApi";
 import { UserContext } from "../../context/userContext";
 import { BusyHours, Task } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";

@@ -24,7 +24,7 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask, freeTime }) => {
       id={`task-${taskInfo.id}`}
       className="flex flex-col justify-between bg-secondary rounded-md shadow-md my-1 p-1"
     >
-      <div className="flex justify-between align-items-middle">
+      <div className="flex justify-between align-items-middle px-1">
         <h2 className="text-sm my-2">{taskInfo.content}</h2>
       {/* <Cancel onClick={() => deleteTaskHandler(taskInfo.id as number)} /> */}
       <button  className="border bg-red-200 px-2 rounded-md shadow-md my-2" onClick={() => deleteTaskHandler(taskInfo.id as number)} >X</button>
