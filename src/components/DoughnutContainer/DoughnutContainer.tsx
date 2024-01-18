@@ -30,15 +30,11 @@ const DoughnutContainer: FC<DoughtnutProps> = ({ tasks, freeTime }) => {
 
   const tasksByGroup = removeDuplicates(tasks.map((t) => t.taskType));
   const taskGroupData = tasksByGroup.map((t): TaskGroupData => {
-
-    const x = tasks
-    .filter((task) => task.taskType === t)
-    // const minutes = tasks
-    //   .filter((task) => task.taskType === t)
-    //   .map((task) => task.completionTime)
-    //   .reduce((a, b) => a + b);
-    const minutes = x.map(task => task.completionTime).reduce((a, b) => a + b);
-    const color = x.find(task => task.taskType == t)?.typeColor;
+    const x = tasks.filter((task) => task.taskType === t);
+    const minutes = x
+      .map((task) => task.completionTime)
+      .reduce((a, b) => a + b);
+    const color = x.find((task) => task.taskType == t)?.typeColor;
 
     return {
       type: t,
@@ -58,8 +54,6 @@ const DoughnutContainer: FC<DoughtnutProps> = ({ tasks, freeTime }) => {
     });
   }
 
-  console.log(taskGroupData);
-
   const data = {
     labels: taskGroupData.map((data) => data.type),
     datasets: [
@@ -67,7 +61,7 @@ const DoughnutContainer: FC<DoughtnutProps> = ({ tasks, freeTime }) => {
         labels: taskGroupData.map((data) => data.type),
         data: taskGroupData.map((data) => data.percentage),
         //backgroundColor: tasks.map((data) => data.typeColor),
-        backgroundColor: taskGroupData.map(data => data.taskColor),
+        backgroundColor: taskGroupData.map((data) => data.taskColor),
         hoverOffset: 4,
       },
     ],
