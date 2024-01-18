@@ -1,4 +1,3 @@
-import React from 'react'
 import TimeForm from '../TimeForm/TimeForm'
 import TaskForm from '../TaskForm/TaskForm'
 import TaskContainer from '../TaskContainer/TaskContainer'
