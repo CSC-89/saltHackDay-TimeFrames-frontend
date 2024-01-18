@@ -4,15 +4,17 @@ import TaskContainer from "../TaskContainer/TaskContainer";
 import DoughnutContainer from "../DoughnutContainer/DoughnutContainer";
 import Navbar from "../Navbar/Navbar";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { addNewTask, deleteTask, readTasks } from "../api/TaskApi";
+import { UserContext } from "../../context/userContext";
 
 const Home = () => {
   const [selectedDate, setDate] = useState(dayjs(new Date).format("DD/MM/YYYY"));
   const [tasks, setTasks] = useState<Task[]>([]);
+  const ctx = useContext(UserContext);
   const freeTime = 6.0;
-  const userId = 1;
+  const userId = ctx.id;
 
   // const dateHandler = (newDate: any) => {
   //   setDate(newDate.format("DD/MM/YYYY"));
@@ -53,7 +55,7 @@ const Home = () => {
         </div>
         <TimeForm date={selectedDate}/> */}
         <TaskForm addTask={addTaskHandler}/>
-        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} userId={userId} />
+        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} />
         <DoughnutContainer />
       </main>
     </div>

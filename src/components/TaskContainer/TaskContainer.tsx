@@ -3,11 +3,10 @@ import TaskItem from '../TaskItem/TaskItem'
 
 type TaskContainerProps = {
   deleteTask: (id: number) => void;
-  userId: number
   tasks: Task[]
 }
 
-const TaskContainer: FC<TaskContainerProps> = ({tasks, deleteTask, userId}) => {
+const TaskContainer: FC<TaskContainerProps> = ({tasks, deleteTask}) => {
   return (
     <div className='shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2'>
         {tasks.length ? tasks.map((elm, i) => {
