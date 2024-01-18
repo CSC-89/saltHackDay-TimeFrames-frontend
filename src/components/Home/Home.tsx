@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center">
       <Navbar />
-      <main>
+      <main className="p-5">
         <TimeForm />
         <TaskForm />
         <TaskContainer />
