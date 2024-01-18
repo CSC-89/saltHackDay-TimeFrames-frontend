@@ -14,3 +14,7 @@ export const addNewTask = async (data: any) => {
     .post(url, { content: data.content, typeColor: data.typeColor })
     .then((results) => console.log(results));
 };
+
+export const deleteTask = () => {
+
+}

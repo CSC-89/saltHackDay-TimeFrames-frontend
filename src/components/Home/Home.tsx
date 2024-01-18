@@ -6,10 +6,7 @@ import Navbar from "../Navbar/Navbar";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { addNewTask, readTasks } from "../api/TaskApi";
-import useSWR from "swr";
-
-const url = "https://localhost:7033/api/ToDo";
+import { addNewTask, deleteTask, readTasks } from "../api/TaskApi";
 
 const Home = () => {
   const [selectedDate, setDate] = useState(dayjs(new Date).format("DD/MM/YYYY"));
@@ -25,12 +22,16 @@ const Home = () => {
     setTasks([...tasks, data])
   }
   
-  const taskFetchHandler = async () => {
+  const fetchTasks = async () => {
     setTasks(await readTasks());
   };
 
+  const removeTaskfromList = () => {
+    deleteTask();
+  }
+
   useEffect(() => {
-    taskFetchHandler();
+    fetchTasks();
   }, []);
 
   return (
@@ -42,7 +43,7 @@ const Home = () => {
         </div>
         <TimeForm date={selectedDate}/> */}
         <TaskForm addTask={addTaskHandler}/>
-        <TaskContainer tasks={tasks} />
+        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} />
         <DoughnutContainer />
       </main>
     </div>
