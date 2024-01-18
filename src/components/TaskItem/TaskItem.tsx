@@ -1,6 +1,7 @@
 import { Cancel } from "@mui/icons-material";
 import { Progress } from "@material-tailwind/react";
 import { FC } from "react";
+import { getPercentage } from "../../helpers/getPercentage";
 
 type TaskItemProps = {
   deleteTask: (id: number) => void;
@@ -14,12 +15,6 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask, freeTime }) => {
   const deleteTaskHandler = (id: number) => {
     deleteTask(id);
   };
-
-  const getPercentage = (smaller: number, larger: number) => {
-    const difference = larger - smaller;
-    const remainder = (difference / larger) * 100;
-    return 100 - remainder;
-  }
 
   const percentage = getPercentage(taskInfo.completionTime, freeTimeMinutes);
 

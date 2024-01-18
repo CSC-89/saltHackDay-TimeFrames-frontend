@@ -54,7 +54,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
             <option value="Study-yellow">Study</option>
             <option value="Exercise-purple">Exercise</option>
             <option value="Cleaning-blue">Cleaning</option>
-            <option value="#Other-teal">Other</option>
+            <option value="Other-teal">Other</option>
           </select>
         </div>
         <button
