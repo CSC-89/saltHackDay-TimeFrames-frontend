@@ -26,14 +26,13 @@ const Home = () => {
     setTasks(await readTasks());
   };
 
-  const removeTaskfromList = (id: number) => {
+  const removeTaskfromList = (id: number, dbId: number) => {
     const toRemove = tasks.findIndex(t => t.id === id)
     console.log("index: ", toRemove);
-    console.log("id", id);
     const newArr = [...tasks];
-    
-    setTasks(newArr.splice(toRemove, 1));
-    deleteTask(id);
+    newArr.splice(id, 1);
+    setTasks(newArr);
+    deleteTask(dbId);
   }
 
   useEffect(() => {
