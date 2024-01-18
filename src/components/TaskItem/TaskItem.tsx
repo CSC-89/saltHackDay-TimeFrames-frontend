@@ -12,8 +12,15 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask }) => {
     deleteTask(id);
   };
 
-  
+  const getPercentage = (smaller: number, larger: number) => {
+    const difference = larger - smaller;
+    console.log("smaller: ", smaller)
+    console.log("difference: ",difference)
+    const remainder = (difference / larger)*100;
+    return 100 - remainder;
+  }
 
+  console.log(taskInfo);
 
   return (
     <article
@@ -24,7 +31,7 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask }) => {
       <h2 className="text-sm my-2">{taskInfo.content}</h2>
       <Cancel onClick={() => deleteTaskHandler(taskInfo.id as number)} />
       </div>
-      <Progress placeholder={undefined} value={20} color={taskInfo.typeColor as any} />
+      <Progress placeholder={undefined} value={getPercentage(5, 120)} color={taskInfo.typeColor as any} />
     </article>
   );
 };
