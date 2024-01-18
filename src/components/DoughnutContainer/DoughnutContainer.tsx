@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Chart, ArcElement } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { getPercentage } from "../../helpers/getPercentage";
+import { Task } from "../../types/GlobalTypes";
 Chart.register(ArcElement);
 
 type TaskGroupData = {

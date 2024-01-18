@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./TimeForm.css";
 import { FC } from "react";
+import { BusyHours } from "../../types/GlobalTypes";
 
 type FormValues = {
   date: Date;
@@ -10,15 +11,21 @@ type FormValues = {
 };
 
 type TimeFormProp = {
-  date: string
+  date: string,
+  updateFreeTime: (hours: BusyHours) => void
 }
 
-const TimeForm: FC<TimeFormProp> = ({date}) => {
+const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime}) => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const submitHandler: SubmitHandler<FormValues> = (data: FormValues) => {
     console.log(data);
+    updateFreeTime({workTime: data.workTime, wakeTime: data.wakeTime, sleepTime: data.sleepTime});
   };
+
+  // const submitHandler: SubmitHandler<FormValues> = (data: FormValues) => {
+  //   console.log(data);
+  // };
 
   return (
     <section className="shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2">

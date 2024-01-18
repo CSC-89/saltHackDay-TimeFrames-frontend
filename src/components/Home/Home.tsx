@@ -8,18 +8,25 @@ import { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { addNewTask, deleteTask, readTasks } from "../api/TaskApi";
 import { UserContext } from "../../context/userContext";
+import { BusyHours, Task } from "../../types/GlobalTypes";
 
 const Home = () => {
   const [selectedDate, setDate] = useState(dayjs(new Date).format("DD/MM/YYYY"));
   const [tasks, setTasks] = useState<Task[]>([]);
   const ctx = useContext(UserContext);
-  const freeTime = 6.0;
+  const [freeTime, setFreeTime] = useState(0);
   // const userId = ctx.id;
 
   // const dateHandler = (newDate: any) => {
   //   setDate(newDate.format("DD/MM/YYYY"));
   //   console.log(newDate);
   // }
+
+  const updateFreeTime = ({wakeTime, sleepTime, workTime}: BusyHours) => {
+    const awakeHours = sleepTime - wakeTime;
+    const freeTime = awakeHours -workTime
+    setFreeTime(freeTime);
+  }
 
   const addTaskHandler = async (data: Task) => {
     const response = await addNewTask(data);
@@ -46,17 +53,18 @@ const Home = () => {
     fetchTasks();
   }, []);
 
+  console.log(freeTime);
   return (
     <div className="flex flex-col items-center">
       <Navbar />
       <main className="p-5">
         {/* <div className="mx-auto flex justify-center my-3">
           <DatePicker label="SelectDate" value={selectedDate} onChange={newDate => dateHandler(newDate)} />
-        </div>
-        <TimeForm date={selectedDate}/> */}
+        </div> */}
+        <TimeForm date={selectedDate} updateFreeTime={updateFreeTime} />
         <TaskForm addTask={addTaskHandler}/>
         <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} freeTime={freeTime}/>
-        <DoughnutContainer tasks={tasks} freeTime={freeTime} />
+        {freeTime > 0 && <DoughnutContainer tasks={tasks} freeTime={freeTime} />}
       </main>
     </div>
   );

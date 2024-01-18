@@ -2,6 +2,7 @@ import { Cancel } from "@mui/icons-material";
 import { Progress } from "@material-tailwind/react";
 import { FC } from "react";
 import { getPercentage } from "../../helpers/getPercentage";
+import { Task } from "../../types/GlobalTypes";
 
 type TaskItemProps = {
   deleteTask: (id: number) => void;
