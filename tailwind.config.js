@@ -7,7 +7,14 @@ module.exports = withMT({
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#88B1E0",
+        secondary: '#F3FAFF',
+        buttonSubmit: "#DFF5F2",
+        buttonSubmitFont: "#3A9189"
+      }
+    },
   },
   plugins: [],
 });

@@ -38,7 +38,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
   };
 
   return (
-    <section className="border shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2 my-3">
+    <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
       <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
         <input id="content-input"
           className="my-2"
@@ -66,9 +66,9 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
         </div>
         <button
           type="submit"
-          className="button-green m-2 bg-green-200 w-28 rounded-md shadow-md mx-auto "
+          className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
         >
-          Submit
+          Add Task
         </button>
       </form>
     </section>

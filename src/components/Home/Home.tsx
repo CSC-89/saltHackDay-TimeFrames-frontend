@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import { addNewTask, deleteTask, readTasks } from "../api/TaskApi";
 import { UserContext } from "../../context/userContext";
 import { BusyHours, Task } from "../../types/GlobalTypes";
+import { calculateFreeTime } from "../../helpers/calculateFreeTime";
 
 const Home = () => {
   const [selectedDate, setDate] = useState(dayjs(new Date).format("DD/MM/YYYY"));
@@ -23,9 +24,7 @@ const Home = () => {
   // }
 
   const updateFreeTime = ({wakeTime, sleepTime, workTime}: BusyHours) => {
-    const awakeHours = sleepTime - wakeTime;
-    const freeTime = awakeHours -workTime
-    setFreeTime(freeTime);
+    setFreeTime(calculateFreeTime(workTime, wakeTime, sleepTime));
   }
 
   const addTaskHandler = async (data: Task) => {
@@ -61,7 +60,7 @@ const Home = () => {
         {/* <div className="mx-auto flex justify-center my-3">
           <DatePicker label="SelectDate" value={selectedDate} onChange={newDate => dateHandler(newDate)} />
         </div> */}
-        <TimeForm date={selectedDate} updateFreeTime={updateFreeTime} />
+        <TimeForm date={selectedDate} updateFreeTime={updateFreeTime} freeTime={freeTime} />
         <TaskForm addTask={addTaskHandler}/>
         <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} freeTime={freeTime}/>
         {freeTime > 0 && <DoughnutContainer tasks={tasks} freeTime={freeTime} />}
