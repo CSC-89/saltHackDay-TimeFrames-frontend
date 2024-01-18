@@ -11,6 +11,8 @@ import { addNewTask, deleteTask, readTasks } from "../api/TaskApi";
 const Home = () => {
   const [selectedDate, setDate] = useState(dayjs(new Date).format("DD/MM/YYYY"));
   const [tasks, setTasks] = useState<Task[]>([]);
+  const freeTime = 6.0;
+  const userId = 1;
 
   // const dateHandler = (newDate: any) => {
   //   setDate(newDate.format("DD/MM/YYYY"));
@@ -20,6 +22,7 @@ const Home = () => {
   const addTaskHandler = async (data: Task) => {
     const response = await addNewTask(data);
     console.log(response);
+
     setTasks([...tasks, response])
   }
   
@@ -29,7 +32,7 @@ const Home = () => {
 
   const removeTaskfromList = (id: number) => {
     const toDelete = tasks.findIndex(t => t.id === id);
-    console.log(id);
+
     const newArr = [...tasks];
     newArr.splice(toDelete, 1);
 
@@ -50,7 +53,7 @@ const Home = () => {
         </div>
         <TimeForm date={selectedDate}/> */}
         <TaskForm addTask={addTaskHandler}/>
-        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} />
+        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} userId={userId} />
         <DoughnutContainer />
       </main>
     </div>

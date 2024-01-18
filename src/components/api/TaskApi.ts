@@ -3,7 +3,7 @@ const path = "https://localhost:7033/api/ToDo";
 
 export const readTasks = async () => {
   const data = axios.get(path).then((results) => results.data);
-  
+
   return data;
 };
 
@@ -16,6 +16,5 @@ export const addNewTask = async (data: any) => {
 };
 
 export const deleteTask = (id: number) => {
-    axios.delete(`${path}/${id}`)
-    .then(() => console.log('Delete successful'));
+    axios.delete(`${path}/${id}`);
 }
