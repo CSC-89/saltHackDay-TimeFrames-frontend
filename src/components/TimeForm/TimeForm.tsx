@@ -1,6 +1,5 @@
-import { FieldValue, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./TimeForm.css";
-import { SyntheticEvent } from "react";
 
 type FormValues = {
   date: Date;
@@ -8,6 +7,7 @@ type FormValues = {
   wakeTime: number;
   sleepTime: number;
 };
+
 const TimeForm = () => {
   const { register, handleSubmit } = useForm<FormValues>();
 
