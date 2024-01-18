@@ -56,7 +56,7 @@ const Home = () => {
         <TimeForm date={selectedDate}/> */}
         <TaskForm addTask={addTaskHandler}/>
         <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} freeTime={freeTime}/>
-        <DoughnutContainer tasks={tasks}/>
+        <DoughnutContainer tasks={tasks} freeTime={freeTime} />
       </main>
     </div>
   );

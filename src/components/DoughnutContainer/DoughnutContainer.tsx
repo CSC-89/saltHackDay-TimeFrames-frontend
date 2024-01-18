@@ -1,46 +1,84 @@
-import { FC } from "react"
+import { FC } from "react";
 import { useState } from "react";
 import { Chart, ArcElement } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { getPercentage } from "../../helpers/getPercentage";
 Chart.register(ArcElement);
 
-type DoughtnutProps = {
-  tasks: Task[]
-}
+type TaskGroupData = {
+  type: string;
+  totalMinutes: number;
+  percentage: number;
+  taskColor: string;
+};
 
-const DoughnutContainer: FC<DoughtnutProps> = ({tasks}) => {
- 
-function removeDuplicates(arr: string[]) {
-    let unique:string[] = [];
-    arr.forEach(element => {
-        if (!unique.includes(element)) {
-            unique.push(element);
-        }
+type DoughtnutProps = {
+  tasks: Task[];
+  freeTime: number;
+};
+
+const DoughnutContainer: FC<DoughtnutProps> = ({ tasks, freeTime }) => {
+  function removeDuplicates(arr: string[]) {
+    let unique: string[] = [];
+    arr.forEach((element) => {
+      if (!unique.includes(element)) {
+        unique.push(element);
+      }
     });
     return unique;
-}
-const tasksByGroup = removeDuplicates(tasks.map(t => t.taskType));
+  }
 
-  const [data, setData] = useState({
-    labels: tasks.map((data) => data.taskType),
+  const tasksByGroup = removeDuplicates(tasks.map((t) => t.taskType));
+  const taskGroupData = tasksByGroup.map((t): TaskGroupData => {
+
+    const x = tasks
+    .filter((task) => task.taskType === t)
+    // const minutes = tasks
+    //   .filter((task) => task.taskType === t)
+    //   .map((task) => task.completionTime)
+    //   .reduce((a, b) => a + b);
+    const minutes = x.map(task => task.completionTime).reduce((a, b) => a + b);
+    const color = x.find(task => task.taskType == t)?.typeColor;
+
+    return {
+      type: t,
+      totalMinutes: minutes,
+      percentage: getPercentage(minutes, freeTime * 60),
+      taskColor: color as any,
+    };
+  });
+
+  if (taskGroupData.length) {
+    taskGroupData.push({
+      type: "Free Time",
+      totalMinutes: 0,
+      percentage:
+        100 - taskGroupData.map((x) => x.percentage).reduce((a, b) => a + b),
+      taskColor: "green",
+    });
+  }
+
+  console.log(taskGroupData);
+
+  const data = {
+    labels: taskGroupData.map((data) => data.type),
     datasets: [
       {
-        labels: tasks.map((data) => data.taskType),
-        data: tasks.map((data) => data.taskType),
+        labels: taskGroupData.map((data) => data.type),
+        data: taskGroupData.map((data) => data.percentage),
         //backgroundColor: tasks.map((data) => data.typeColor),
-        backgroundColor: ["red", "blue", "green"],
+        backgroundColor: taskGroupData.map(data => data.taskColor),
         hoverOffset: 4,
       },
     ],
     borderColor: "black",
-  });
+  };
 
   return (
     <div id="pie-chart">
-        <Doughnut data={data} />
-      </div>
-  )
-}
+      <Doughnut data={data} />
+    </div>
+  );
+};
 
-export default DoughnutContainer
+export default DoughnutContainer;
