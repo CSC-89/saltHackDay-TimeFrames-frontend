@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./TimeForm.css";
+import { FC } from "react";
 
 type FormValues = {
   date: Date;
@@ -8,7 +9,11 @@ type FormValues = {
   sleepTime: number;
 };
 
-const TimeForm = () => {
+type TimeFormProp = {
+  date: string
+}
+
+const TimeForm: FC<TimeFormProp> = ({date}) => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const submitHandler: SubmitHandler<FormValues> = (data: FormValues) => {
@@ -18,7 +23,7 @@ const TimeForm = () => {
   return (
     <section className="border shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2">
       <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
-        <input {...register("date")} value={"#"} hidden/>
+        <input {...register("date")} value={date} hidden/>
         <div>
           <label className="flex justify-between">
             Working Hours
