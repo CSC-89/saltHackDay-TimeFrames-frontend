@@ -1,4 +1,3 @@
-import { Cancel } from "@mui/icons-material";
 import { Progress } from "@material-tailwind/react";
 import { FC } from "react";
 import { getPercentage } from "../../helpers/getPercentage";
@@ -39,9 +38,9 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask, freeTime }) => {
       />
         <details>
           <div className="flex justify-between">
-          <h3 className="text-xs">{`Only uses ${Math.floor(
+          <h3 className="text-xs">Only uses <span className="text-buttonSubmitFont">{`${Math.floor(
             percentage
-            )}% of your free time!`}</h3>
+            )}`}%</span> of your free time!</h3>
           </div>
         </details>
         </div>

@@ -2,7 +2,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import "./TimeForm.css";
 import { FC, useState } from "react";
 import { BusyHours } from "../../types/GlobalTypes";
-import { calculateFreeTime } from "../../helpers/calculateFreeTime";
 
 type FormValues = {
   date: Date;
@@ -53,6 +52,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
           <label htmlFor="waking-hour">
             Wake Up
             <input
+            id="wake-input"
               className="w-12 rounded-sm ml-4 text-center"
               type="number"
               min={0}
@@ -62,6 +62,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
           <label className="pl-6">
             Bed
             <input
+            id="sleep-input"
               className="w-12 rounded-sm ml-4 text-center"
               type="number"
               min={0}

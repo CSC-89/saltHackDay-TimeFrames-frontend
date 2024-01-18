@@ -1,7 +1,5 @@
-import { MenuItem, Select } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FC, useContext } from "react";
-import { AddTask } from "@mui/icons-material";
 import { UserContext } from "../../context/userContext";
 import { Task } from "../../types/GlobalTypes";
 
