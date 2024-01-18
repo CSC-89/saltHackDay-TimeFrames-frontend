@@ -10,9 +10,13 @@ export const readTasks = async () => {
 };
 
 export const addNewTask = async (data: any) => {
-  await axios
+  const addedTask = await axios
     .post(path, { content: data.content, typeColor: data.typeColor })
-    .then((results) => console.log(results));
+    .then((results) => {
+        console.log(results)
+        return results.data
+    });
+    return addedTask;
 };
 
 export const deleteTask = (id: number) => {

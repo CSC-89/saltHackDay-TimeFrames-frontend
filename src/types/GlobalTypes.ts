@@ -1,5 +1,5 @@
 type Task = {
-    id: number
+    id?: number | undefined
     content: string,
     typeColor: string,
     dayDataId: number

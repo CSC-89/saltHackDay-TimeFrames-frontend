@@ -8,6 +8,7 @@ type FormValues = {
   typeColor: string
 };
 
+
 type TaskFormProps = {
   addTask : (data: Task) => void;
 }
@@ -16,7 +17,8 @@ const TaskForm: FC<TaskFormProps> = ({addTask}) => {
   const { register, handleSubmit } = useForm<FormValues>();
   const id = 1;
 
-  const addTaskHandler: SubmitHandler<FormValues> = (data: FormValues) => {
+  const addTaskHandler: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
     addTask({content: data.content, typeColor: data.typeColor, dayDataId: id });
   };
 

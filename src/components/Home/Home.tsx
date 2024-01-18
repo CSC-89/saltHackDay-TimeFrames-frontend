@@ -17,9 +17,9 @@ const Home = () => {
   //   console.log(newDate);
   // }
 
-  const addTaskHandler = (data: Task) => {
-    addNewTask(data);
-    setTasks([...tasks, data])
+  const addTaskHandler = async (data: Task) => {
+    const response = await addNewTask(data);
+    setTasks([...tasks, response])
   }
   
   const fetchTasks = async () => {
@@ -27,10 +27,9 @@ const Home = () => {
   };
 
   const removeTaskfromList = (id: number, dbId: number) => {
-    const toRemove = tasks.findIndex(t => t.id === id)
-    console.log("index: ", toRemove);
     const newArr = [...tasks];
     newArr.splice(id, 1);
+
     setTasks(newArr);
     deleteTask(dbId);
   }
