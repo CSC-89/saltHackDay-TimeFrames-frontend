@@ -47,6 +47,7 @@ const TimeForm: FC<TimeFormProp> = ({date, updateFreeTime, freeTime}) => {
               {...register("workTime", { required: "This is required" })}
             />
         </div>
+        <h2 className="w-full mb-2 text-center bg-secondary rounded-md">Day length (hours)</h2>
         <div>
           <label htmlFor="waking-hour">
             Wake Up
