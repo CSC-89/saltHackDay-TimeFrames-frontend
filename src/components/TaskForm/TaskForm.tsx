@@ -9,7 +9,7 @@ type FormValues = {
 };
 
 type TaskFormProps = {
-  addTask : (data: AddTask) => void;
+  addTask : (data: Task) => void;
 }
 
 const TaskForm: FC<TaskFormProps> = ({addTask}) => {

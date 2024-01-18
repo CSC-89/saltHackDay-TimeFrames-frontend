@@ -1,6 +1,14 @@
-const TaskItem = () => {
+import { FC } from "react"
+
+type TaskItemProps = {
+  taskInfo: Task
+}
+
+const TaskItem: FC<TaskItemProps> = ({taskInfo}) => {
   return (
-    <div>TaskItem</div>
+    <article className="flex bg-red-100">
+      <h2>{taskInfo.content}</h2>
+    </article>
   )
 }
 

@@ -21,7 +21,7 @@ const TimeForm: FC<TimeFormProp> = ({date}) => {
   };
 
   return (
-    <section className="border shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2">
+    <section className="shadow-md rounded-lg bg-blue-200 w-full mx-auto px-6 py-2">
       <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
         <input {...register("date")} value={date} hidden/>
         <div>

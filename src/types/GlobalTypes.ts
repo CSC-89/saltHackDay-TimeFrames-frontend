@@ -1,4 +1,4 @@
-type AddTask = {
+type Task = {
     content: string,
     typeColor: string,
     dayDataId: number
