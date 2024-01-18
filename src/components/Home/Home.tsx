@@ -14,7 +14,7 @@ const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const ctx = useContext(UserContext);
   const freeTime = 6.0;
-  const userId = ctx.id;
+  // const userId = ctx.id;
 
   // const dateHandler = (newDate: any) => {
   //   setDate(newDate.format("DD/MM/YYYY"));
@@ -55,7 +55,7 @@ const Home = () => {
         </div>
         <TimeForm date={selectedDate}/> */}
         <TaskForm addTask={addTaskHandler}/>
-        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} />
+        <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} freeTime={freeTime}/>
         <DoughnutContainer />
       </main>
     </div>

@@ -4,23 +4,24 @@ import { FC } from "react";
 
 type TaskItemProps = {
   deleteTask: (id: number) => void;
+  freeTime: number
   taskInfo: Task;
 };
 
-const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask }) => {
+const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask, freeTime }) => {
+  const freeTimeMinutes = freeTime * 60;
+
   const deleteTaskHandler = (id: number) => {
     deleteTask(id);
   };
 
   const getPercentage = (smaller: number, larger: number) => {
     const difference = larger - smaller;
-    console.log("smaller: ", smaller)
-    console.log("difference: ",difference)
-    const remainder = (difference / larger)*100;
+    const remainder = (difference / larger) * 100;
     return 100 - remainder;
   }
 
-  console.log(taskInfo);
+  const percentage = getPercentage(taskInfo.completionTime, freeTimeMinutes);
 
   return (
     <article
@@ -31,7 +32,8 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask }) => {
       <h2 className="text-sm my-2">{taskInfo.content}</h2>
       <Cancel onClick={() => deleteTaskHandler(taskInfo.id as number)} />
       </div>
-      <Progress placeholder={undefined} value={getPercentage(5, 120)} color={taskInfo.typeColor as any} />
+      <Progress placeholder={undefined} value={percentage} color={taskInfo.typeColor as any} />
+      <h3 className="text-xs">{`Only uses ${Math.floor(percentage)}% of your free time!`}</h3>
     </article>
   );
 };
