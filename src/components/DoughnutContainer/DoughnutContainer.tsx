@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useState } from "react";
 import { Chart, ArcElement } from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { getPercentage } from "../../helpers/getPercentage";
