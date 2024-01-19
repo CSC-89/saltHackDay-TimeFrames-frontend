@@ -58,7 +58,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
     const starterTypeButton = document.getElementById("starter-type") as HTMLButtonElement;
     setType(starterTypeButton)
   }, [])
-  console.log(type);
+  
   return (
     <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
       <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
