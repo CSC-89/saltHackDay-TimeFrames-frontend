@@ -12,7 +12,9 @@ module.exports = withMT({
         primary: "#88B1E0",
         secondary: '#F3FAFF',
         buttonSubmit: "#DFF5F2",
-        buttonSubmitFont: "#3A9189"
+        buttonSubmitFont: "#3A9189",
+        buttonEnter: "#F3FAFF",
+        buttonEnterFont: '#88B1E0',
       }
     },
   },
