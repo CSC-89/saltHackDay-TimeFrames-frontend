@@ -19,18 +19,12 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
   const [type, setType] = useState<HTMLButtonElement>();
   const [duration, setDuration] = useState<number>(0);
   const [content, setContent] = useState<string>("");
-  const { register, handleSubmit } = useForm<FormValues>();
   const ctx = useContext(UserContext);
 
-  const addTaskHandler: SubmitHandler<FormValues> = (data) => {
-    if (!type) throw new Error("Must declare a type");
+  const addTaskHandler = (evt: SyntheticEvent) => {
+    evt.preventDefault();
 
-    const contentInput = document.getElementById(
-      "content-input"
-    ) as HTMLInputElement;
-    const durationInput = document.getElementById(
-      "duration-input"
-    ) as HTMLInputElement;
+    if (!type) throw new Error("Must declare a type");
 
     const typeValues = type!.value.split("-");
 
@@ -65,7 +59,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
 
   return (
     <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
-      <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
+      <form className="flex flex-col" onSubmit={addTaskHandler}>
         <Input id="content-input"
           className="my-2"
           placeholder="What needs doing today?"
