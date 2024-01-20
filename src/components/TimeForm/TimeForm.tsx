@@ -3,7 +3,7 @@ import "./TimeForm.css";
 import { FC, useState } from "react";
 import { BusyHours } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";
-import type { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { TimePicker } from 'antd';
 
 type FormValues = {
@@ -105,10 +105,10 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
             <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
               Day length (hours)
             </h2>
-            <div>
-                <TimePicker placeholder="Wake" format={"HH:mm"} {...register("wakeTime", { required: "This is required" })} />
-              <p> - </p> 
-              <TimePicker placeholder="Bed" showNow={false} format={"HH:mm"} {...register("sleepTime", { required: "This is required" })} />
+            <div className="flex">
+                <TimePicker defaultValue={dayjs(new Date().getHours())} placeholder="Wake" format={"HH:mm"} />
+              <p className="mx-3"> - </p> 
+              <TimePicker placeholder="Bed" showNow={false} format={"HH:mm"} />
             </div>
             <button
               type="submit"
