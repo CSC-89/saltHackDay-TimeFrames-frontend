@@ -68,7 +68,7 @@ const DoughnutContainer: FC<DoughtnutProps> = ({ tasks, freeTime }) => {
   };
 
   return (
-    <div id="pie-chart">
+    <div id="pie-chart" className="col-start-1 lg:col-start-2 lg:columns-auto lg:row-start-1 lg:row-span-2 lg:mx-5">
       <Doughnut data={data} />
     </div>
   );

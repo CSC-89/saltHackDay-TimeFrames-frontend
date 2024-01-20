@@ -62,7 +62,7 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
   const resetErrorHandler = () => setErrorStatus({ status: false });
 
   return (
-    <section className="shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2">
+    <section className=" col-start-1 shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2">
       {errorStatus.status ? (
         <div className="flex flex-col justify-center h-28">
           <h2 className="text-md text-center">{errorStatus.message}</h2>
@@ -75,8 +75,8 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
         </div>
       ) : !selected ? (
         <form className="flex flex-col" onSubmit={submitHandler}>
-          <div className="my-2 flex justify-between">
-            <label htmlFor="workInput" className="flex justify-between">
+          <div className="my-2 flex justify-between lg:justify-around">
+            <label htmlFor="workInput">
               Working Hours:
             </label>
             <Space.Compact>
@@ -91,7 +91,7 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
           <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
             Day length (hours)
           </h2>
-          <div className="flex">
+          <div className="flex justify-around">
             <TimePicker
               placeholder="Wake"
               minuteStep={15}

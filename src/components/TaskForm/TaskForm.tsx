@@ -59,7 +59,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
   }, []);
 
   return (
-    <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
+    <section className=" col-start-1 border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
       <form className="flex flex-col" onSubmit={addTaskHandler}>
         <Input id="content-input"
           className="my-2"

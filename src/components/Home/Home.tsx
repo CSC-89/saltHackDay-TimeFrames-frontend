@@ -46,7 +46,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center">
       <Navbar />
-      <main className="p-5">
+      <main className="p-5 grid grid-cols-1 lg:grid-cols-2">
         <TimeForm date={selectedDate} updateFreeTime={updateFreeTime} freeTime={freeTime} />
         <TaskForm addTask={addTaskHandler}/>
         <TaskContainer tasks={tasks} deleteTask={removeTaskfromList} freeTime={freeTime}/>
