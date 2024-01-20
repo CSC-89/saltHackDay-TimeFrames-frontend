@@ -38,7 +38,7 @@ const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask, freeTime }) => {
         value={percentage}
         color={taskInfo.typeColor as any}
       />
-        <details>
+        <details className="text-xs">
           <div className="flex justify-between">
           <h3 className="text-xs">Only uses <span className="text-buttonSubmitFont">{`${Math.floor(
             percentage
