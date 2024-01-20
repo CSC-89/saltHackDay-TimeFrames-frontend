@@ -26,11 +26,12 @@ type TimeFormProp = {
 
 const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
   const [selected, setSelected] = useState(false);
+  const [workValue, setWorkValue] = useState<number>(0);
+  const [wakeValue, setWakeValue] = useState<Dayjs | null>(null);
+  const [sleepValue, setSleepValue] = useState<Dayjs | null>(null);
   const [errorStatus, setErrorStatus] = useState<TimeFormError>({
     status: false,
   });
-  const [wakeValue, setWakeValue] = useState<Dayjs | null>(null);
-  const [sleepValue, setSleepValue] = useState<Dayjs | null>(null);
 
   const onWakeChange = (time: Dayjs | null) => {
     setWakeValue(time);
