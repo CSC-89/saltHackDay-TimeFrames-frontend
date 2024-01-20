@@ -32,16 +32,6 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
     status: false,
   });
 
-  const workChangeHandler = (hours: number | null) => {
-    if (hours === null) {
-      setWorkValue(0);
-      return;
-    }
-    setWorkValue(hours as number);
-  };
-  const onWakeChange = (time: Dayjs | null) => setWakeValue(time);
-  const onSleepChange = (time: Dayjs | null) => setSleepValue(time!);
-
   const submitHandler = (evt: SyntheticEvent) => {
     evt.preventDefault();
 
@@ -49,12 +39,6 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
       sleepValue?.diff(wakeValue?.format(), "hour", true).toFixed(1) as string
     );
 
-    // let diff;
-    // if(workValue === null) {
-    //   diff = wakingHours - 0;
-    // } else {
-    //   diff = wakingHours - workValue;
-    // }
     const diff = wakingHours - workValue;
 
     if (diff <= 0) {
@@ -91,30 +75,16 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
         </div>
       ) : !selected ? (
         <form className="flex flex-col" onSubmit={submitHandler}>
-          {/* <input
-            {...register("date", { required: "This is required" })}
-            value={date}
-            hidden
-          /> */}
           <div className="my-2 flex justify-between">
             <label htmlFor="workInput" className="flex justify-between">
               Working Hours:
             </label>
-            {/* <input
-              id="work-input"
-              className="w-12 rounded-md ml-4 text-center border border-gray-600"
-              type="number"
-              min={0}
-              max={12}
-              onChange={(evt) => workChangeHandler(parseInt(evt.target.value))}
-            /> */}
             <Space.Compact>
               <InputNumber
                 min={0}
                 max={12}
-                onChange={workChangeHandler}
+                onChange={(value) => setWorkValue(value === null ? 0 : value)}
                 value={workValue}
-                style={{}}
               />
             </Space.Compact>
           </div>
@@ -127,7 +97,7 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
               minuteStep={15}
               format={"HH:mm"}
               value={wakeValue}
-              onChange={onWakeChange}
+              onChange={(value) => setWakeValue(value)}
             />
             <p className="mx-3"> - </p>
             <TimePicker
@@ -136,7 +106,7 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
               minuteStep={15}
               format={"HH:mm"}
               value={sleepValue}
-              onChange={onSleepChange}
+              onChange={(value) => setSleepValue(value)}
             />
           </div>
 

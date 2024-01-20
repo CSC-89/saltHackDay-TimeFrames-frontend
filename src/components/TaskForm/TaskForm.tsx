@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FC, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { Task } from "../../types/GlobalTypes";
+import { Input, InputNumber, Space } from "antd";
 
 type FormValues = {
   content: string;
@@ -16,6 +17,7 @@ type TaskFormProps = {
 
 const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
   const [type, setType] = useState<HTMLButtonElement>();
+  const [duration, setDuration] = useState<number>(0);
   const { register, handleSubmit } = useForm<FormValues>();
   const ctx = useContext(UserContext);
 
@@ -33,7 +35,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
 
     addTask({
       content: data.content,
-      completionTime: data.completionTime,
+      completionTime: duration,
       taskType: typeValues[0],
       typeColor: typeValues[1],
       dayDataId: ctx.id,
@@ -67,15 +69,16 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
           placeholder="What needs doing today?"
           {...register("content", { required: "This is required" })}
         />
-        <div className="flex justify-left my-2">
-          <label htmlFor="completionTime">Duration:</label>
-          <input
-            id="completion-input"
-            className="w-12 rounded-md border border-gray-600 mx-4 text-center"
-            type="number"
-            {...register("completionTime", { required: "This is required" })}
-          />
-          Minutes
+        <div className="flex justify-between my-2">
+          <label className="self-center">Duration: (mins)</label>
+          <Space.Compact className="w-20 ml-2">
+              <InputNumber
+                min={0}
+                max={12}
+                onChange={value => setDuration(value === null ? 0 : value)}
+                value={duration}
+              />
+            </Space.Compact>
         </div>
         <div className="my-2">
         <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">Type</h2>
