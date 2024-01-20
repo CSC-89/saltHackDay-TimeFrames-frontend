@@ -76,7 +76,7 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
       ) : !selected ? (
         <form className="flex flex-col" onSubmit={submitHandler}>
           <div className="my-2 flex justify-between lg:justify-around">
-            <label htmlFor="workInput">
+            <label htmlFor="workInput" className="self-center">
               Working Hours:
             </label>
             <Space.Compact>
