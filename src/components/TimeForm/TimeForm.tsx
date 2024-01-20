@@ -1,10 +1,9 @@
-import { SubmitHandler, useForm } from "react-hook-form";
 import "./TimeForm.css";
-import { FC, useState } from "react";
+import { FC, SyntheticEvent, useState } from "react";
 // import { BusyHours } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";
 import dayjs, { Dayjs } from "dayjs";
-import { TimePicker } from "antd";
+import { TimePicker, InputNumber, Space } from "antd";
 
 type FormValues = {
   date: Date;
@@ -24,7 +23,7 @@ type TimeFormProp = {
   updateFreeTime: (freeTime: number) => void;
 };
 
-const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
+const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
   const [selected, setSelected] = useState(false);
   const [workValue, setWorkValue] = useState<number>(0);
   const [wakeValue, setWakeValue] = useState<Dayjs | null>(null);
@@ -33,26 +32,31 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
     status: false,
   });
 
-  const onWorkChange = (hours: number) => {
-    setWorkValue(hours);
+  const workChangeHandler = (hours: number | null) => {
+    if(hours === null){
+    setWorkValue(0)
+    return
+    }
+    setWorkValue(hours as number)
   };
-  const onWakeChange = (time: Dayjs | null) => {
-    setWakeValue(time);
-  };
-  const onSleepChange = (time: Dayjs | null) => {
-    setSleepValue(time!);
-  };
+  const onWakeChange = (time: Dayjs | null) => setWakeValue(time);
+  const onSleepChange = (time: Dayjs | null) => setSleepValue(time!);
 
-  const { register, handleSubmit } = useForm<FormValues>();
+  const submitHandler = (evt: SyntheticEvent) => {
+    evt.preventDefault();
 
-  const submitHandler: SubmitHandler<FormValues> = () => {
     const wakingHours: number = parseInt(
       sleepValue?.diff(wakeValue?.format(), "hour", true).toFixed(1) as string
     );
 
+    // let diff;
+    // if(workValue === null) {
+    //   diff = wakingHours - 0;
+    // } else {
+    //   diff = wakingHours - workValue;
+    // }
     const diff = wakingHours - workValue;
 
-    console.log(diff);
     if (diff <= 0) {
       setErrorStatus({
         status: true,
@@ -86,24 +90,27 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
           </button>
         </div>
       ) : !selected ? (
-        <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
-          <input
+        <form className="flex flex-col" onSubmit={submitHandler}>
+          {/* <input
             {...register("date", { required: "This is required" })}
             value={date}
             hidden
-          />
+          /> */}
           <div className="my-2 flex justify-between">
             <label htmlFor="workInput" className="flex justify-between">
               Working Hours:
             </label>
-            <input
+            {/* <input
               id="work-input"
               className="w-12 rounded-md ml-4 text-center border border-gray-600"
               type="number"
               min={0}
               max={12}
-              {...register("workTime", { required: "This is required" })}
-            />
+              onChange={(evt) => workChangeHandler(parseInt(evt.target.value))}
+            /> */}
+            <Space.Compact>
+            <InputNumber min={0} max={12} onChange={workChangeHandler} value={workValue} /> 
+            </Space.Compact>
           </div>
           <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
             Day length (hours)
