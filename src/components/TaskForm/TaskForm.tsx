@@ -3,6 +3,7 @@ import { FC, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { Task } from "../../types/GlobalTypes";
 import { Input, InputNumber, Space } from "antd";
+import { AttachMoneyTwoTone, CleaningServicesTwoTone, ConstructionTwoTone, DirectionsCarTwoTone, FitnessCenterTwoTone, LocalLibraryTwoTone, QuestionMarkTwoTone, ShoppingCartTwoTone } from "@mui/icons-material";
 
 type FormValues = {
   content: string;
@@ -82,55 +83,71 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
           <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
             Type
           </h2>
-          <div className="grid grid-cols-3 items-center">
+          <div className="grid grid-cols-4 items-center">
             <button
               id="starter-type"
               onClick={setTypeHandler}
               type="button"
               value="Exercise-purple"
-              className="m-2 bg-purple-500 text-secondary w-20 rounded-md shadow-md mx-auto border border-white "
+              className="m-2 bg-purple-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-white "
             >
-              Exercise
+              <FitnessCenterTwoTone />
             </button>
             <button
               onClick={setTypeHandler}
               type="button"
               value="Cleaning-blue"
-              className="m-2 bg-blue-500 text-secondary w-20 rounded-md shadow-md mx-auto border border-transparent"
+              className="m-2 bg-blue-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-transparent"
             >
-              Cleaning
+              <CleaningServicesTwoTone />
             </button>
             <button
               onClick={setTypeHandler}
               type="button"
               value="Study-yellow"
-              className="m-2 bg-yellow-500 text-black w-20 rounded-md shadow-md mx-auto border border-transparent"
+              className="m-2 bg-yellow-500 text-black w-10 rounded-md shadow-md mx-auto border border-transparent"
             >
-              Study
+              <LocalLibraryTwoTone />
             </button>
             <button
               type="button"
               onClick={setTypeHandler}
               value="Shopping-brown"
-              className="m-2 bg-brown-500 text-secondary w-20 rounded-md shadow-md mx-auto border border-transparent"
+              className="m-2 bg-brown-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-transparent"
             >
-              Shopping
+              <ShoppingCartTwoTone />
             </button>
             <button
               type="button"
               onClick={setTypeHandler}
               value="Travel-red"
-              className="m-2 bg-red-500 text-secondary w-20 rounded-md shadow-md mx-auto border border-transparent"
+              className="m-2 bg-red-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-transparent"
             >
-              Travel
+              <DirectionsCarTwoTone />
+            </button>
+            <button
+              type="button"
+              onClick={setTypeHandler}
+              value="Accounts-orange"
+              className="m-2 bg-orange-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-transparent"
+            >
+              <AttachMoneyTwoTone />
+            </button>
+            <button
+              type="button"
+              onClick={setTypeHandler}
+              value="Other-indigo"
+              className="m-2 bg-indigo-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-transparent"
+            >
+              <ConstructionTwoTone />
             </button>
             <button
               type="button"
               onClick={setTypeHandler}
               value="Other-teal"
-              className="m-2 bg-teal-500 text-secondary w-20 rounded-md shadow-md mx-auto border border-transparent"
+              className="m-2 bg-teal-500 text-secondary w-10 rounded-md shadow-md mx-auto border border-transparent"
             >
-              Other
+              <QuestionMarkTwoTone />
             </button>
           </div>
         </div>

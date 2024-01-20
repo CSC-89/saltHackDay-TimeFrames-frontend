@@ -2,7 +2,7 @@
 import { FC, useState } from "react";
 import { getPercentage } from "../../helpers/getPercentage";
 import { Task } from "../../types/GlobalTypes";
-import { DeleteTwoTone } from "@mui/icons-material";
+import { DeleteTwoTone, FitnessCenterTwoTone } from "@mui/icons-material";
 import { Progress, Space } from 'antd';
 
 type TaskItemProps = {
