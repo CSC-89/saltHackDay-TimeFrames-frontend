@@ -33,11 +33,11 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
   });
 
   const workChangeHandler = (hours: number | null) => {
-    if(hours === null){
-    setWorkValue(0)
-    return
+    if (hours === null) {
+      setWorkValue(0);
+      return;
     }
-    setWorkValue(hours as number)
+    setWorkValue(hours as number);
   };
   const onWakeChange = (time: Dayjs | null) => setWakeValue(time);
   const onSleepChange = (time: Dayjs | null) => setSleepValue(time!);
@@ -109,7 +109,13 @@ const TimeForm: FC<TimeFormProp> = ({ updateFreeTime, freeTime }) => {
               onChange={(evt) => workChangeHandler(parseInt(evt.target.value))}
             /> */}
             <Space.Compact>
-            <InputNumber min={0} max={12} onChange={workChangeHandler} value={workValue} /> 
+              <InputNumber
+                min={0}
+                max={12}
+                onChange={workChangeHandler}
+                value={workValue}
+                style={{}}
+              />
             </Space.Compact>
           </div>
           <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
