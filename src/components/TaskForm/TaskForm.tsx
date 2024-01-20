@@ -18,31 +18,32 @@ type TaskFormProps = {
 const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
   const [type, setType] = useState<HTMLButtonElement>();
   const [duration, setDuration] = useState<number>(0);
+  const [content, setContent] = useState<string>("");
   const { register, handleSubmit } = useForm<FormValues>();
   const ctx = useContext(UserContext);
 
   const addTaskHandler: SubmitHandler<FormValues> = (data) => {
-    if(!type) throw new Error("Must declare a type");
+    if (!type) throw new Error("Must declare a type");
 
     const contentInput = document.getElementById(
       "content-input"
     ) as HTMLInputElement;
-    const completionInput = document.getElementById(
-      "completion-input"
+    const durationInput = document.getElementById(
+      "duration-input"
     ) as HTMLInputElement;
-    
+
     const typeValues = type!.value.split("-");
 
     addTask({
-      content: data.content,
+      content: content,
       completionTime: duration,
       taskType: typeValues[0],
       typeColor: typeValues[1],
       dayDataId: ctx.id,
     });
 
-    contentInput.value = "";
-    completionInput.value = "";
+    setContent("")
+    setDuration(0)
   };
 
   const setTypeHandler = (evt: SyntheticEvent) => {
@@ -56,32 +57,37 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
   };
 
   useEffect(() => {
-    const starterTypeButton = document.getElementById("starter-type") as HTMLButtonElement;
-    setType(starterTypeButton)
-  }, [])
+    const starterTypeButton = document.getElementById(
+      "starter-type"
+    ) as HTMLButtonElement;
+    setType(starterTypeButton);
+  }, []);
 
   return (
     <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
       <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
-        <input
-          id="content-input"
-          className="my-2 rounded-md border border-gray-600 pl-2"
+        <Input id="content-input"
+          className="my-2"
           placeholder="What needs doing today?"
-          {...register("content", { required: "This is required" })}
+          onChange={(evt) =>
+            setContent(evt.target.value.length ? evt.target.value : "")
+          }
+          value={content}
         />
-        <div className="flex justify-between my-2">
+        <div className="flex justify-between mb-2">
           <label className="self-center">Duration: (mins)</label>
           <Space.Compact className="w-20 ml-2">
-              <InputNumber
-                min={0}
-                max={12}
-                onChange={value => setDuration(value === null ? 0 : value)}
-                value={duration}
-              />
-            </Space.Compact>
+            <InputNumber id="duration-input"
+              min={0}
+              onChange={(value) => setDuration(value === null ? 0 : value)}
+              value={duration}
+            />
+          </Space.Compact>
         </div>
         <div className="my-2">
-        <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">Type</h2>
+          <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
+            Type
+          </h2>
           <div className="grid grid-cols-3 items-center">
             <button
               id="starter-type"
