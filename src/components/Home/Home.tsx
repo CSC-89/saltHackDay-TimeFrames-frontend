@@ -11,7 +11,7 @@ import { BusyHours, Task } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";
 
 const Home = () => {
-  const [selectedDate] = useState(dayjs(new Date).format("DD/MM/YYYY"));
+  const [selectedDate] = useState(dayjs().toString());
   const [tasks, setTasks] = useState<Task[]>([]);
   const [freeTime, setFreeTime] = useState(0);
 

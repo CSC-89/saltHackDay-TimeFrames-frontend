@@ -29,10 +29,14 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
   const [errorStatus, setErrorStatus] = useState<TimeFormError>({
     status: false,
   });
-  const [value, setValue] = useState<Dayjs | null>(null);
+  const [wakeValue, setWakeValue] = useState<Dayjs | null>(null);
+  const [sleepValue, setSleepValue] = useState<Dayjs | null>(null);
 
-  const onChange = (time: Dayjs | null) => {
-    setValue(time!);
+  const onWakeChange = (time: Dayjs | null) => {
+    setWakeValue(time);
+  };
+  const onSleepChange = (time: Dayjs | null) => {
+    setSleepValue(time!);
   };
 
   const { register, handleSubmit } = useForm<FormValues>();
@@ -42,6 +46,9 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
     wakeTime,
     sleepTime,
   }: FormValues) => {
+
+    console.log(sleepValue?.diff(wakeValue?.format(), "hour", true).toFixed(1))
+
     if (calculateFreeTime(workTime, wakeTime, sleepTime) <= 0) {
       setErrorStatus({
         status: true,
@@ -106,10 +113,11 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
               Day length (hours)
             </h2>
             <div className="flex">
-                <TimePicker defaultValue={dayjs(new Date().getHours())} placeholder="Wake" format={"HH:mm"} />
+                <TimePicker placeholder="Wake" minuteStep={15} format={"HH:mm"} value={wakeValue} onChange={onWakeChange} />
               <p className="mx-3"> - </p> 
-              <TimePicker placeholder="Bed" showNow={false} format={"HH:mm"} />
+              <TimePicker placeholder="Bed" showNow={false} minuteStep={15} format={"HH:mm"} value={sleepValue} onChange={onSleepChange} />
             </div>
+
             <button
               type="submit"
               className="m-2 mt-4 bg-buttonSubmit text-buttonSubmitFont border border-gray-600 w-28 rounded-md shadow-md mx-auto "
