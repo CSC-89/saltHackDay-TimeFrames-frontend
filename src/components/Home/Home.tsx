@@ -21,7 +21,6 @@ const Home = () => {
 
   const addTaskHandler = async (data: Task) => {
     const response = await addNewTask(data);
-    console.log(response);
 
     setTasks([...tasks, response])
   }

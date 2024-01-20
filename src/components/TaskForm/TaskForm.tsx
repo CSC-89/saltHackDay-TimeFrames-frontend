@@ -30,7 +30,6 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
     ) as HTMLInputElement;
     
     const typeValues = type!.value.split("-");
-    console.log(typeValues[1])
 
     addTask({
       content: data.content,
@@ -58,7 +57,7 @@ const TaskForm: FC<TaskFormProps> = ({ addTask }) => {
     const starterTypeButton = document.getElementById("starter-type") as HTMLButtonElement;
     setType(starterTypeButton)
   }, [])
-  
+
   return (
     <section className="border shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2 my-3">
       <form className="flex flex-col" onSubmit={handleSubmit(addTaskHandler)}>
