@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./TimeForm.css";
 import { FC, useState } from "react";
-import { BusyHours } from "../../types/GlobalTypes";
+// import { BusyHours } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";
-import dayjs, { Dayjs } from 'dayjs';
-import { TimePicker } from 'antd';
+import dayjs, { Dayjs } from "dayjs";
+import { TimePicker } from "antd";
 
 type FormValues = {
   date: Date;
@@ -21,7 +21,7 @@ type TimeFormError = {
 type TimeFormProp = {
   freeTime: number;
   date: string;
-  updateFreeTime: (hours: BusyHours) => void;
+  updateFreeTime: (freeTime: number) => void;
 };
 
 const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
@@ -33,6 +33,9 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
     status: false,
   });
 
+  const onWorkChange = (hours: number) => {
+    setWorkValue(hours);
+  };
   const onWakeChange = (time: Dayjs | null) => {
     setWakeValue(time);
   };
@@ -47,9 +50,13 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
     wakeTime,
     sleepTime,
   }: FormValues) => {
+    const wakingHours: number = parseInt(
+      sleepValue?.diff(wakeValue?.format(), "hour", true).toFixed(1) as string
+    );
 
-    console.log(sleepValue?.diff(wakeValue?.format(), "hour", true).toFixed(1))
+    const diff = wakingHours - workValue;
 
+    console.log(diff);
     if (calculateFreeTime(workTime, wakeTime, sleepTime) <= 0) {
       setErrorStatus({
         status: true,
@@ -59,89 +66,92 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
       return;
     }
 
-    updateFreeTime({
-      workTime: workTime,
-      wakeTime: wakeTime,
-      sleepTime: sleepTime,
-    });
+    updateFreeTime(diff);
     setSelected(true);
   };
 
   const resetHoursHandler = () => {
-    updateFreeTime({ workTime: 0, wakeTime: 0, sleepTime: 0 });
+    updateFreeTime(0);
     setSelected(false);
   };
 
-  const resetErrorHandler = () => setErrorStatus({status: false});
-  
+  const resetErrorHandler = () => setErrorStatus({ status: false });
 
   return (
     <section className="shadow-md rounded-lg bg-primary opacity-90 w-full mx-auto px-6 py-2">
       {errorStatus.status ? (
         <div className="flex flex-col justify-center h-28">
-        <h2 className="text-md text-center">
-          {errorStatus.message}
-        </h2>
-        <button
-          onClick={resetErrorHandler}
-          className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
-        >
-          Back
-        </button>
-      </div>
-      ) : (
-        !selected ? (
-          <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
+          <h2 className="text-md text-center">{errorStatus.message}</h2>
+          <button
+            onClick={resetErrorHandler}
+            className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
+          >
+            Back
+          </button>
+        </div>
+      ) : !selected ? (
+        <form className="flex flex-col" onSubmit={handleSubmit(submitHandler)}>
+          <input
+            {...register("date", { required: "This is required" })}
+            value={date}
+            hidden
+          />
+          <div className="my-2 flex justify-between">
+            <label htmlFor="workInput" className="flex justify-between">
+              Working Hours:
+            </label>
             <input
-              {...register("date", { required: "This is required" })}
-              value={date}
-              hidden
+              id="work-input"
+              className="w-12 rounded-md ml-4 text-center border border-gray-600"
+              type="number"
+              min={0}
+              max={12}
+              {...register("workTime", { required: "This is required" })}
             />
-            <div className="my-2 flex justify-between">
-              <label htmlFor="workInput" className="flex justify-between">
-                Working Hours:
-              </label>
-              <input
-                id="work-input"
-                className="w-12 rounded-md ml-4 text-center border border-gray-600"
-                type="number"
-                min={0}
-                max={12}
-                {...register("workTime", { required: "This is required" })}
-              />
-            </div>
-            <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
-              Day length (hours)
-            </h2>
-            <div className="flex">
-                <TimePicker placeholder="Wake" minuteStep={15} format={"HH:mm"} value={wakeValue} onChange={onWakeChange} />
-              <p className="mx-3"> - </p> 
-              <TimePicker placeholder="Bed" showNow={false} minuteStep={15} format={"HH:mm"} value={sleepValue} onChange={onSleepChange} />
-            </div>
-
-            <button
-              type="submit"
-              className="m-2 mt-4 bg-buttonSubmit text-buttonSubmitFont border border-gray-600 w-28 rounded-md shadow-md mx-auto "
-            >
-              Set Free Time
-            </button>
-          </form>
-        ) : (
-          <div className="flex flex-col justify-center h-28">
-            <h2 className="text-md text-center">
-              You have <span className="text-secondary">{freeTime} hours</span> of
-              free time today!
-            </h2>
-            <button
-              onClick={resetHoursHandler}
-              className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
-            >
-              Reset
-            </button>
           </div>
-        )
+          <h2 className="w-full mb-2 text-center bg-blue-100 rounded-md">
+            Day length (hours)
+          </h2>
+          <div className="flex">
+            <TimePicker
+              placeholder="Wake"
+              minuteStep={15}
+              format={"HH:mm"}
+              value={wakeValue}
+              onChange={onWakeChange}
+            />
+            <p className="mx-3"> - </p>
+            <TimePicker
+              placeholder="Bed"
+              showNow={false}
+              minuteStep={15}
+              format={"HH:mm"}
+              value={sleepValue}
+              onChange={onSleepChange}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="m-2 mt-4 bg-buttonSubmit text-buttonSubmitFont border border-gray-600 w-28 rounded-md shadow-md mx-auto "
+          >
+            Set Free Time
+          </button>
+        </form>
+      ) : (
+        <div className="flex flex-col justify-center h-28">
+          <h2 className="text-md text-center">
+            You have <span className="text-secondary">{freeTime} hours</span> of
+            free time today!
+          </h2>
+          <button
+            onClick={resetHoursHandler}
+            className="m-2 bg-buttonSubmit text-buttonSubmitFont w-28 rounded-md shadow-md mx-auto "
+          >
+            Reset
+          </button>
+        </div>
       )}
-      
     </section>
   );
 };

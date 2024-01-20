@@ -7,8 +7,8 @@ export type Task = {
     dayDataId: number,
   }
 
-  export type BusyHours= {
-    workTime: number,
-    wakeTime: number,
-    sleepTime: number
-  }
+  // export type BusyHours= {
+  //   workTime: number,
+  //   wakeTime: number,
+  //   sleepTime: number
+  // }

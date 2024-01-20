@@ -7,7 +7,7 @@ import Navbar from "../Navbar/Navbar";
 import {  useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { addNewTask, deleteTask, readTasks } from "../../api/TaskApi";
-import { BusyHours, Task } from "../../types/GlobalTypes";
+import { Task } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";
 
 const Home = () => {
@@ -15,8 +15,8 @@ const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [freeTime, setFreeTime] = useState(0);
 
-  const updateFreeTime = ({wakeTime, sleepTime, workTime}: BusyHours) => {
-    setFreeTime(calculateFreeTime(workTime, wakeTime, sleepTime));
+  const updateFreeTime = (calculatedFreeTime: number) => {
+    setFreeTime(calculatedFreeTime);
   }
 
   const addTaskHandler = async (data: Task) => {
