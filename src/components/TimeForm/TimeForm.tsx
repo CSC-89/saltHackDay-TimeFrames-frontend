@@ -45,11 +45,7 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
 
   const { register, handleSubmit } = useForm<FormValues>();
 
-  const submitHandler: SubmitHandler<FormValues> = ({
-    workTime,
-    wakeTime,
-    sleepTime,
-  }: FormValues) => {
+  const submitHandler: SubmitHandler<FormValues> = () => {
     const wakingHours: number = parseInt(
       sleepValue?.diff(wakeValue?.format(), "hour", true).toFixed(1) as string
     );
@@ -57,7 +53,7 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
     const diff = wakingHours - workValue;
 
     console.log(diff);
-    if (calculateFreeTime(workTime, wakeTime, sleepTime) <= 0) {
+    if (diff <= 0) {
       setErrorStatus({
         status: true,
         message:
