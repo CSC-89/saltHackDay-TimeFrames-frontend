@@ -3,6 +3,8 @@ import "./TimeForm.css";
 import { FC, useState } from "react";
 import { BusyHours } from "../../types/GlobalTypes";
 import { calculateFreeTime } from "../../helpers/calculateFreeTime";
+import type { Dayjs } from 'dayjs';
+import { TimePicker } from 'antd';
 
 type FormValues = {
   date: Date;
@@ -27,6 +29,12 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
   const [errorStatus, setErrorStatus] = useState<TimeFormError>({
     status: false,
   });
+  const [value, setValue] = useState<Dayjs | null>(null);
+
+  const onChange = (time: Dayjs | null) => {
+    setValue(time!);
+  };
+
   const { register, handleSubmit } = useForm<FormValues>();
 
   const submitHandler: SubmitHandler<FormValues> = ({
@@ -98,27 +106,9 @@ const TimeForm: FC<TimeFormProp> = ({ date, updateFreeTime, freeTime }) => {
               Day length (hours)
             </h2>
             <div>
-              <label htmlFor="waking-hour">
-                Wake Up
-                <input
-                  id="wake-input"
-                  className="w-12 rounded-md border border-gray-600 ml-4 text-center"
-                  type="number"
-                  min={0}
-                  {...register("wakeTime", { required: "This is required" })}
-                />
-              </label>
-              <label className="pl-6">
-                Bed
-                <input
-                  id="sleep-input"
-                  className="w-12 rounded-md border border-gray-600 ml-4 text-center"
-                  type="number"
-                  min={0}
-                  max={23}
-                  {...register("sleepTime")}
-                />
-              </label>
+                <TimePicker placeholder="Wake" format={"HH:mm"} {...register("wakeTime", { required: "This is required" })} />
+              <p> - </p> 
+              <TimePicker placeholder="Bed" showNow={false} format={"HH:mm"} {...register("sleepTime", { required: "This is required" })} />
             </div>
             <button
               type="submit"

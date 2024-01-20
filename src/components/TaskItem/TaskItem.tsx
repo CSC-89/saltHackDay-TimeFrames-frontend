@@ -1,7 +1,8 @@
 import { Progress } from "@material-tailwind/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { getPercentage } from "../../helpers/getPercentage";
 import { Task } from "../../types/GlobalTypes";
+
 
 type TaskItemProps = {
   deleteTask: (id: number) => void;
@@ -11,6 +12,7 @@ type TaskItemProps = {
 
 const TaskItem: FC<TaskItemProps> = ({ taskInfo, deleteTask, freeTime }) => {
   const freeTimeMinutes = freeTime * 60;
+  
 
   const deleteTaskHandler = (id: number) => {
     deleteTask(id);
