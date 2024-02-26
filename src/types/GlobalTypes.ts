@@ -6,9 +6,3 @@ export type Task = {
     typeColor: string,
     dayDataId: number,
   }
-
-  // export type BusyHours= {
-  //   workTime: number,
-  //   wakeTime: number,
-  //   sleepTime: number
-  // }
