@@ -1,16 +1,7 @@
 import "./TimeForm.css";
 import { FC, SyntheticEvent, useState } from "react";
-// import { BusyHours } from "../../types/GlobalTypes";
-import { calculateFreeTime } from "../../helpers/calculateFreeTime";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { TimePicker, InputNumber, Space } from "antd";
-
-type FormValues = {
-  date: Date;
-  workTime: number;
-  wakeTime: number;
-  sleepTime: number;
-};
 
 type TimeFormError = {
   status: boolean;

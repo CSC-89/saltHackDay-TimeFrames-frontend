@@ -1,16 +1,9 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+
 import { FC, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { Task } from "../../types/GlobalTypes";
 import { Input, InputNumber, Space } from "antd";
 import { AttachMoneyTwoTone, CleaningServicesTwoTone, ConstructionTwoTone, DirectionsCarTwoTone, FitnessCenterTwoTone, LocalLibraryTwoTone, QuestionMarkTwoTone, ShoppingCartTwoTone } from "@mui/icons-material";
-
-type FormValues = {
-  content: string;
-  completionTime: number;
-  typeInfo: string;
-  dayDataId: number;
-};
 
 type TaskFormProps = {
   addTask: (data: Task) => void;

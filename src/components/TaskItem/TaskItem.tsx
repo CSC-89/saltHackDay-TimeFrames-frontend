@@ -1,9 +1,9 @@
 // import { Progress } from "@material-tailwind/react";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { getPercentage } from "../../helpers/getPercentage";
 import { Task } from "../../types/GlobalTypes";
-import { DeleteTwoTone, FitnessCenterTwoTone } from "@mui/icons-material";
-import { Progress, Space } from 'antd';
+import { DeleteTwoTone } from "@mui/icons-material";
+import { Progress } from 'antd';
 
 type TaskItemProps = {
   deleteTask: (id: number) => void;

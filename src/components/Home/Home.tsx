@@ -8,7 +8,6 @@ import {  useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { addNewTask, deleteTask, readTasks } from "../../api/TaskApi";
 import { Task } from "../../types/GlobalTypes";
-import { calculateFreeTime } from "../../helpers/calculateFreeTime";
 
 const Home = () => {
   const [selectedDate] = useState(dayjs().toString());
